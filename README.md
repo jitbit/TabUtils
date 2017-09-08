@@ -23,7 +23,7 @@ TabUtils.OnBroadcastMessage("eventName", function (eventDataString) { DoSomethin
 //sends a broadcast message to all tabs, including the current tab too!
 TabUtils.BroadcastMessageToAllTabs("eventName", eventDataString);
 
-//P.S. standard localStorage events are not sent to urent tabs, only OTHER tabs.
+//P.S. standard localStorage events are not sent to current tab, only OTHER tabs.
 //This component sends the message to ALL tabs
 
 </script>
