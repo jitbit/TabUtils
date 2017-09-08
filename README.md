@@ -9,7 +9,7 @@ Multiple browser tabs communication, locking and synchronization component. Base
 
 ## Usage 
 
-```
+```JavaScript
 <script src="TabUtils.js"></script>
 
 <script>
