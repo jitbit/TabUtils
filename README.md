@@ -13,7 +13,7 @@ Multiple browser tabs communication, locking and synchronization component. Base
 
 <script>
 
-//runs a function only once
+//interlocked call - runs code only once
 TabUtils.CallOnce("lockname", function () { alert("I run only once in multiple tabs"); });
 
 //handle a broadcasted message
