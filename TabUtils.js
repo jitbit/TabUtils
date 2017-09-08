@@ -44,6 +44,8 @@ var TabUtils = new (function () {
 	}
 
 	this.BroadcastMessageToAllTabs = function (messageId, eventData) {
+		if (!window.localStorage) return; //no local storage. old browser
+
 		//this triggers 'storage' event for all other tabs except the current tab
 		localStorage.setItem(keyPrefix + "event" + messageId, eventData);
 
@@ -55,6 +57,8 @@ var TabUtils = new (function () {
 	var handlers = {};
 
 	this.OnBroadcastMessage = function (messageId, fn) {
+		if (!window.localStorage) return; //no local storage. old browser
+
 		//first register a handler for "storage" event that we trigger above
 		$(window).on('storage', function (ev) {
 			if (ev.originalEvent.key != keyPrefix + "event" + messageId) return; // ignore other keys
