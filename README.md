@@ -1,5 +1,5 @@
 # TabUtils
-Multiple browser tabs communication, locking and synchronization component. Based on localStorage object.
+Multiple browser tabs communication, locking and synchronization component (same-origin). Based on localStorage object.
 
 ### Features:
 
