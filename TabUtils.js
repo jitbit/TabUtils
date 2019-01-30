@@ -1,4 +1,4 @@
-/*
+﻿/*
 Jitbit TabUtils - helper for multiple browser tabs. version 1.0
 
 https://github.com/jitbit/TabUtils
@@ -33,14 +33,13 @@ var TabUtils = new (function () {
 				localStorage.setItem(localStorageKey, "1");
 
 				fn();
-
-				//cleanup - release the lock after 4 seconds and on window unload (just in case user closed the window while the lock is still held)
-				setTimeout(function () { localStorage.removeItem(localStorageKey); }, 3000);
-				$(window).unload(function () { localStorage.removeItem(localStorageKey); });
 			}
-			else
-				return; //call already runs... return
-		}, Math.random() * 50);
+	
+		}, Math.random() * 50 + Math.random() * 50);
+
+		//cleanup - release the lock after 3 seconds and on window unload (just in case user closed the window while the lock is still held)
+		setTimeout(function () { localStorage.removeItem(localStorageKey); }, 3000);
+		$(window).unload(function () { localStorage.removeItem(localStorageKey); });
 	}
 
 	this.BroadcastMessageToAllTabs = function (messageId, eventData) {
