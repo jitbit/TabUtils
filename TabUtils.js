@@ -39,18 +39,26 @@ var TabUtils = new (function () {
 
 		//cleanup - release the lock after 3 seconds and on window unload (just in case user closed the window while the lock is still held)
 		setTimeout(function () { localStorage.removeItem(localStorageKey); }, 3000);
-		$(window).unload(function () { localStorage.removeItem(localStorageKey); });
+		window.addEventListener('unload', function () { localStorage.removeItem(localStorageKey); });
 	}
 
 	this.BroadcastMessageToAllTabs = function (messageId, eventData) {
 		if (!window.localStorage) return; //no local storage. old browser
 
+		var data = {
+			data: eventData,
+			timeStamp: (new Date()).getTime()
+		}; //add timestamp because overwriting same data does not trigger the event
+
 		//this triggers 'storage' event for all other tabs except the current tab
-		localStorage.setItem(keyPrefix + "event" + messageId, eventData);
+		localStorage.setItem(keyPrefix + "event" + messageId, JSON.stringify(data));
 
 		//now we also need to manually execute handler in the current tab too, because current tab does not get 'storage' events
 		try { handlers[messageId](eventData); } //"try" in case handler not found
 		catch(x) { }
+
+		//cleanup
+		setTimeout(function () { localStorage.removeItem(keyPrefix + "event" + messageId); }, 3000);
 	}
 
 	var handlers = {};
@@ -59,10 +67,11 @@ var TabUtils = new (function () {
 		if (!window.localStorage) return; //no local storage. old browser
 
 		//first register a handler for "storage" event that we trigger above
-		$(window).on('storage', function (ev) {
-			if (ev.originalEvent.key != keyPrefix + "event" + messageId) return; // ignore other keys
-			messageData = ev.originalEvent.newValue;
-			fn(messageData);
+		window.addEventListener('storage', function (ev) {
+			if (ev.key != keyPrefix + "event" + messageId) return; // ignore other keys
+			if (!ev.newValue) return; //called by cleanup?
+			var messageData = JSON.parse(ev.newValue);
+			fn(messageData.data);
 		});
 
 		//second, add callback function to the local array so we can access it directly
