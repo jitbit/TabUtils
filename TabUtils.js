@@ -1,4 +1,4 @@
-﻿/*
+/*
 Jitbit TabUtils - helper for multiple browser tabs. version 1.0
 
 https://github.com/jitbit/TabUtils
@@ -17,7 +17,11 @@ var TabUtils = new (function () {
 	//runs code only once in multiple tabs
 	//the lock holds for 4 seconds (in case the function is async and returns right away, for example, an ajax call intiated)
 	//then it is cleared
-	this.CallOnce = function (lockname, fn) {
+	this.CallOnce = function (lockname, fn, timeout) {
+
+		timeout = timeout || 3000; //lock held for 3 seconds by default
+
+		if (!lockname) throw "empty lockname";
 
 		if (!window.localStorage) { //no local storage. old browser. screw it, just run the function
 			fn();
@@ -38,8 +42,7 @@ var TabUtils = new (function () {
 		}, Math.random() * 50 + Math.random() * 50);
 
 		//cleanup - release the lock after 3 seconds and on window unload (just in case user closed the window while the lock is still held)
-		setTimeout(function () { localStorage.removeItem(localStorageKey); }, 3000);
-		window.addEventListener('unload', function () { localStorage.removeItem(localStorageKey); });
+		setTimeout(function () { localStorage.removeItem(localStorageKey); }, timeout);
 	}
 
 	this.BroadcastMessageToAllTabs = function (messageId, eventData) {
