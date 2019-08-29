@@ -15,7 +15,8 @@ Multiple browser tabs communication, locking and synchronization component (same
 <script>
 
 //locked "critical section" code - runs only once
-TabUtils.CallOnce("lockname", function () { alert("I run only once in multiple tabs"); });
+TabUtils.CallOnce("lockname", function () { alert("I run only once in multiple tabs"); }, timeout);
+//"timeout" above is optional (for how long to hold the lock - in milliseconds)
 
 //handle a broadcasted message
 TabUtils.OnBroadcastMessage("eventName", function (eventDataString) { DoSomething(); });
