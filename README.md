@@ -10,7 +10,7 @@ Multiple browser tabs communication, locking and synchronization component (same
 ## Usage 
 
 ```html
-<script src="TabUtils.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/jitbit/TabUtils/TabUtils.js"></script>
 
 <script>
 
