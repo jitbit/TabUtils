@@ -33,3 +33,5 @@ TabUtils.BroadcastMessageToAllTabs("eventName", eventDataString);
 Make sure you register the event handler BEFORE sending a broadcasted message.
 
 Contributions are very welcome.
+
+&copy; [Jitbit](https://jitbit.github.com/)
