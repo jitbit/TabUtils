@@ -30,16 +30,12 @@ var TabUtils = new (function () {
 
 		var localStorageKey = keyPrefix + lockname;
 
-		//add random delay to "serialize" two calls, in case called literally simultaniously
+		localStorage.setItem(localStorageKey, myTabId);
+		//re-read after a delay (after all tabs have saved their tabIDs into ls)
 		setTimeout(function () {
-
-			if (localStorage.getItem(localStorageKey) === null) { //no lock found yet
-				localStorage.setItem(localStorageKey, "1");
-
+			if (localStorage.getItem(localStorageKey) == myTabId)
 				fn();
-			}
-	
-		}, Math.random() * 50 + Math.random() * 50);
+		}, 150);
 
 		//cleanup - release the lock after 3 seconds and on window unload (just in case user closed the window while the lock is still held)
 		setTimeout(function () { localStorage.removeItem(localStorageKey); }, timeout);
@@ -80,4 +76,15 @@ var TabUtils = new (function () {
 		//second, add callback function to the local array so we can access it directly
 		handlers[messageId] = fn;
 	}
+
+
+	function now() {
+		return new Date().getTime();
+	}
+
+	function someNumber() {
+		return Math.random() * 1000000000 | 0;
+	}
+
+	var myTabId = now() + ":" + someNumber();
 })();
