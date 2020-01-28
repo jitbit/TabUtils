@@ -1,6 +1,8 @@
 # TabUtils
 Multiple browser tabs communication, locking and synchronization component (same-origin). Based on localStorage object.
 
+One small file, zero dependencies.
+
 ### Features:
 
 * executing "interlocked" function call - runs only once across multiple tabs
