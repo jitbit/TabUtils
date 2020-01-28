@@ -34,6 +34,10 @@ One small file, zero dependencies.
 
 Make sure you register the event handler BEFORE sending a broadcasted message.
 
+### P.S. My favorite use case
+
+Suppose you need to request something from the back end, while having multiple *identical* tabs open in the browser - why overwhelm the server when you can do that only once?
+
 Contributions are very welcome.
 
 &copy; [Jitbit](https://jitbit.github.com/)
