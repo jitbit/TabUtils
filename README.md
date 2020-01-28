@@ -14,18 +14,18 @@ Multiple browser tabs communication, locking and synchronization component (same
 
 <script>
 
-//locked "critical section" code - runs only once
-TabUtils.CallOnce("lockname", function () { alert("I run only once in multiple tabs"); }, timeout);
-//"timeout" above is optional (for how long to hold the lock - in milliseconds)
+    //locked "critical section" code - runs only once
+    TabUtils.CallOnce("lockname", function () { alert("I run only once in multiple tabs"); }, timeout);
+    //"timeout" above is optional (for how long to hold the lock - in milliseconds)
 
-//handle a broadcasted message
-TabUtils.OnBroadcastMessage("eventName", function (eventDataString) { DoSomething(); });
+    //handle a broadcasted message
+    TabUtils.OnBroadcastMessage("eventName", function (eventDataString) { DoSomething(); });
 
-//sends a broadcast message to all tabs, including the current tab too!
-TabUtils.BroadcastMessageToAllTabs("eventName", eventDataString);
+    //sends a broadcast message to all tabs, including the current tab too!
+    TabUtils.BroadcastMessageToAllTabs("eventName", eventDataString);
 
-//P.S. standard localStorage events are not being sent to current tab, only OTHER tabs.
-//This component sends the message to ALL tabs
+    //P.S. standard localStorage events are not being sent to current tab, only OTHER tabs.
+    //This component sends the message to ALL tabs
 
 </script>
 ```
