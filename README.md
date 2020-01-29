@@ -5,9 +5,9 @@ One small file, zero dependencies.
 
 ### Features:
 
-* executing "interlocked" function call - runs only once across multiple tabs
-* broadcasting a message to all tabs (including the current one) along with some "data" string
-* ...and handling the "broadcasted message" event
+* Execute "interlocked" function call - **runs only once across multiple tabs**
+* Broadcast a message to all tabs (including the current one) along with some "data" string
+* ...and handle the "broadcasted message" event
 
 ## Usage 
 
