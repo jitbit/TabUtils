@@ -34,9 +34,11 @@ One small file, zero dependencies.
 
 Make sure you register the event handler BEFORE sending a broadcasted message.
 
-### P.S. My favorite use case
+### P.S. My favorite use cases
 
-Suppose you need to request something from the back end, while having multiple *identical* tabs open in the browser - why overwhelm the server when you can do that only once?
+1. Suppose you need to request something from the back end, while having multiple *identical* tabs open in the browser - why overwhelm the server when you can do that only once? And then send a message to other tabs
+
+2. If you have a live websocket connection to a server (or a Server-Sent-Events connection, or even "long polling") - why keep multiple connections from indentical tabs? Keep only one and let other tabs know once something important happens. Chrome has a limit of 6 concurrent connection to a webserver when using long-polling for example. A webserver can have its own limits too.
 
 Contributions are very welcome.
 
