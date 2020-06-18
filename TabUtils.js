@@ -77,14 +77,9 @@ var TabUtils = new (function () {
 		handlers[messageId] = fn;
 	}
 
-
-	function now() {
-		return new Date().getTime();
-	}
-
 	function someNumber() {
 		return Math.random() * 1000000000 | 0;
 	}
 
-	var myTabId = now() + ":" + someNumber();
+	var myTabId = performance.now() + ":" + someNumber();
 })();
